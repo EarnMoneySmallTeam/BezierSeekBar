@@ -50,7 +50,7 @@ Step 2. Add the dependency
 
 ### Usage
 
-```java
+```xml
   <tech.nicesky.bezierseekbar.BezierSeekBar
         android:id="@+id/bsBar_test"
         app:bsBar_color_ball="@android:color/white"
@@ -64,6 +64,13 @@ Step 2. Add the dependency
         app:bsBar_unit="kg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+	
+	app:bsBar_down_text_margin_top="11dp"
+        app:bsBar_down_text_size="14sp"
+        app:bsBar_select_text_size="20sp"
+        app:bsBar_ball_circle_radius="4dp"
+        app:bsBar_line_width="1dp"
+	
         />
 ```
 or
