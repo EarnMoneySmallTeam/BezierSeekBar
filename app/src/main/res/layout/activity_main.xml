@@ -12,8 +12,8 @@
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
         android:background="#ef5350"
+        android:gravity="left"
         android:text="你的体重是多少？"
         android:textColor="@android:color/white"
         android:textSize="20sp"
@@ -22,8 +22,8 @@
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/txt_statue"
         android:layout_width="match_parent"
-        android:background="#ef5350"
         android:layout_height="wrap_content"
+        android:background="#ef5350"
         android:gravity="left"
         android:text="balance"
         android:textColor="@android:color/white"
@@ -33,8 +33,8 @@
     <tech.nicesky.bezierseekbar.BezierSeekBar
         android:id="@+id/bsBar_test"
         android:layout_width="match_parent"
-        android:background="#ef5350"
         android:layout_height="wrap_content"
+        android:background="#ef5350"
         app:bsBar_color_ball="@android:color/white"
         app:bsBar_color_bg_selected="@android:color/white"
         app:bsBar_color_line="@android:color/white"
@@ -67,11 +67,29 @@
     <LinearLayout
         android:id="@+id/fram"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="300dp"
         android:gravity="center">
 
     </LinearLayout>
+
+    <tech.nicesky.bezierseekbar.BezierSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ef5350"
+        app:bsBar_color_ball="@android:color/white"
+        app:bsBar_color_bg_selected="@android:color/white"
+        app:bsBar_color_line="@android:color/white"
+        app:bsBar_color_value="@android:color/white"
+        app:bsBar_color_value_selected="#ef5350"
+        app:bsBar_down_text_margin_top="11dp"
+        app:bsBar_down_text_size="14sp"
+        app:bsBar_select_text_size="20sp"
+        app:bsBar_ball_circle_radius="4dp"
+        app:bsBar_line_width="1dp"
+        app:bsBar_unit=" s"
+        app:bsBar_value_max="60"
+        app:bsBar_value_min="0"
+        app:bsBar_value_selected="0" />
 
     <Button
         android:id="@+id/btn_setValueSelected"

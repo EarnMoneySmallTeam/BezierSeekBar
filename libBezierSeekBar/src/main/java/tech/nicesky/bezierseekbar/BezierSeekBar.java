@@ -66,9 +66,14 @@ public class BezierSeekBar extends View {
      */
     private float fingerX, fingerXmin = circleRadiusMin, fingerXMax, fingerXDefault, fingerYDefault;
 
+    //选中字体大小
     private float textSelectedSize = 20f;
-
+    //线下字体大小
     private float textSize = 12f;
+    //线下字体与线的距离
+    private float textMarginTop = 4f;
+    //线的宽度
+    private float widthLine = 2f;
 
     private int colorValue, colorValueSelected, colorLine, colorBall, colorBgSelected;
 
@@ -135,9 +140,11 @@ public class BezierSeekBar extends View {
 //        this.circleRadius = circleRadiusMin;
 //        this.spaceToLine =  circleRadiusMin *2F;
 
-        textSelectedSize = dp2px(context, 20F);
-        textSize = dp2px(context, 12F);
-
+        this.textSelectedSize = dp2px(context, 20F);
+        this.textSize = dp2px(context, 12F);
+        this.textMarginTop = dp2px(context, 4F);
+        this.widthLine = dp2px(context, 2F);
+        this.circleRadiusMin = dp2px(context, 2F);
         this.valueMax = 200;
         this.valueMin = 30;
 
@@ -147,13 +154,15 @@ public class BezierSeekBar extends View {
 
         initAttr(context, attrs);
 
+        this.circleRadius = this.circleRadiusMin;
+        this.circleRadiusMax = this.circleRadiusMin*1.5F;
         this.bgRect = new RectF();
 
         this.bezierPaint = new Paint();
         this.bezierPaint.setAntiAlias(true);
         this.bezierPaint.setStyle(Paint.Style.STROKE);
         this.bezierPaint.setColor(colorLine);
-        this.bezierPaint.setStrokeWidth(2F);
+        this.bezierPaint.setStrokeWidth(widthLine);
 
         this.textPaint = new Paint();
         this.textPaint.setAntiAlias(true);
@@ -256,6 +265,11 @@ public class BezierSeekBar extends View {
 
             this.colorBall = attributes.getColor(R.styleable.BezierSeekBar_bsBar_color_ball, Color.BLACK);
             this.colorLine = attributes.getColor(R.styleable.BezierSeekBar_bsBar_color_line, Color.BLACK);
+            this.widthLine = attributes.getDimension(R.styleable.BezierSeekBar_bsBar_line_width, 2f);
+            this.textSize = attributes.getDimension(R.styleable.BezierSeekBar_bsBar_down_text_size, 12f);
+            this.textSelectedSize = attributes.getDimension(R.styleable.BezierSeekBar_bsBar_select_text_size, 20f);
+            this.circleRadiusMin = attributes.getDimension(R.styleable.BezierSeekBar_bsBar_ball_circle_radius, 15f);
+            this.textMarginTop = attributes.getDimension(R.styleable.BezierSeekBar_bsBar_down_text_margin_top, 2f);
             this.colorValue = attributes.getColor(R.styleable.BezierSeekBar_bsBar_color_value, Color.BLACK);
             this.colorValueSelected = attributes.getColor(R.styleable.BezierSeekBar_bsBar_color_value_selected, Color.WHITE);
             this.colorBgSelected = attributes.getColor(R.styleable.BezierSeekBar_bsBar_color_bg_selected, Color.BLACK);
@@ -316,11 +330,9 @@ public class BezierSeekBar extends View {
         bezierPath.lineTo(width, (float) 2 * height / 3);
         canvas.drawPath(bezierPath, bezierPaint);
 
-        //ball
-        canvas.drawCircle(this.fingerX, (float) 2 * height / 3 + spaceToLine + circleRadius, circleRadius, ballPaint);
 
-        canvas.drawText("" + valueMin, 1F, (float) 2 * height / 3F + textSize, textDownPaint);
-        canvas.drawText("" + valueMax, width - getTextWidth(textDownPaint, "200") - 1F, (float) 2 * height / 3F + dp2px(getContext(), 12F), textDownPaint);
+        canvas.drawText("" + valueMin, 1F, (float) 2 * height / 3F + textSize + 10 + textMarginTop, textDownPaint);
+        canvas.drawText("" + valueMax, width - getTextWidth(textDownPaint, "200") - 1F, (float) 2 * height / 3F + textSize + 10 + textMarginTop, textDownPaint);
 
         String text = valueSelected + unit;
 
@@ -342,6 +354,18 @@ public class BezierSeekBar extends View {
                     (float) 2 * height / 3F - bezierHeight * 2 + 10F);
             canvas.drawRoundRect(bgRect, 20F, 20F, txtSelectedBgPaint);
         }
+
+        //ball
+        if (valueSelected == valueMin) {
+            canvas.drawCircle(2f + circleRadius, (float) 2 * height / 3 + spaceToLine, circleRadius, ballPaint);
+        } else {
+            if (valueSelected == valueMax) {
+                canvas.drawCircle(width - circleRadius - 2f, (float) 2 * height / 3 + spaceToLine, circleRadius, ballPaint);
+            } else {
+                canvas.drawCircle(this.fingerX, (float) 2 * height / 3 + spaceToLine, circleRadius, ballPaint);
+            }
+        }
+
 
         canvas.drawText(text, valueX + 20F, (float) 2 * height / 3F - bezierHeight * 2 - 15F, textPaint);
     }

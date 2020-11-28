@@ -2,6 +2,11 @@
 <resources>
     <declare-styleable name="BezierSeekBar">
         <attr name="bsBar_color_line" format="reference|color" />
+        <attr name="bsBar_line_width" format="dimension" />
+        <attr name="bsBar_down_text_size" format="dimension" />
+        <attr name="bsBar_select_text_size" format="dimension" />
+        <attr name="bsBar_down_text_margin_top" format="dimension" />
+        <attr name="bsBar_ball_circle_radius" format="dimension" />
         <attr name="bsBar_color_ball" format="reference|color" />
         <attr name="bsBar_color_value" format="reference|color" />
         <attr name="bsBar_color_value_selected" format="reference|color" />
